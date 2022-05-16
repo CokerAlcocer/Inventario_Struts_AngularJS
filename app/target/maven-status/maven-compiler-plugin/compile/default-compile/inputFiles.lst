@@ -1,0 +1,10 @@
+/Users/alcoker/Desktop/Inventario_Prototype/app/src/main/java/mx/utez/edu/app/utils/DatabaseConnection.java
+/Users/alcoker/Desktop/Inventario_Prototype/app/src/main/java/mx/utez/edu/app/category/controller/CategoryAction.java
+/Users/alcoker/Desktop/Inventario_Prototype/app/src/main/java/mx/utez/edu/app/brand/controller/BrandAction.java
+/Users/alcoker/Desktop/Inventario_Prototype/app/src/main/java/mx/utez/edu/app/category/model/CategoryDao.java
+/Users/alcoker/Desktop/Inventario_Prototype/app/src/main/java/mx/utez/edu/app/product/controller/ProductAction.java
+/Users/alcoker/Desktop/Inventario_Prototype/app/src/main/java/mx/utez/edu/app/brand/model/BrandDao.java
+/Users/alcoker/Desktop/Inventario_Prototype/app/src/main/java/mx/utez/edu/app/category/model/Category.java
+/Users/alcoker/Desktop/Inventario_Prototype/app/src/main/java/mx/utez/edu/app/brand/model/Brand.java
+/Users/alcoker/Desktop/Inventario_Prototype/app/src/main/java/mx/utez/edu/app/product/model/Product.java
+/Users/alcoker/Desktop/Inventario_Prototype/app/src/main/java/mx/utez/edu/app/product/model/ProductDao.java

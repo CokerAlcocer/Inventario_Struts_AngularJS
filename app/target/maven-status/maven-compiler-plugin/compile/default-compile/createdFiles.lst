@@ -1,0 +1,10 @@
+mx/utez/edu/app/brand/controller/BrandAction.class
+mx/utez/edu/app/product/controller/ProductAction.class
+mx/utez/edu/app/category/model/CategoryDao.class
+mx/utez/edu/app/brand/model/Brand.class
+mx/utez/edu/app/product/model/Product.class
+mx/utez/edu/app/brand/model/BrandDao.class
+mx/utez/edu/app/category/model/Category.class
+mx/utez/edu/app/utils/DatabaseConnection.class
+mx/utez/edu/app/category/controller/CategoryAction.class
+mx/utez/edu/app/product/model/ProductDao.class

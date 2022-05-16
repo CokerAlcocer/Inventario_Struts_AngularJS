@@ -1,0 +1,4 @@
+package mx.utez.edu.app.brand.model;
+
+public class BrandDao {
+}
