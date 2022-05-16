@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<% String context = request.getContextPath();%>
 <html lang="es">
 
 <head>
@@ -20,16 +21,16 @@
 <body style="font-family: Arial;">
 <!--INICIO DEL TAB DE NAVEGACIÓN-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="./index.jsp">Gestor de Inventarios</a>
+  <a class="navbar-brand" href="<s:url action="index" />">Gestor de Inventarios</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
           aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="./index.jsp"><i class="fas fa-boxes-stacked"></i>
+      <a class="nav-item nav-link active" href="<s:url action="index" />"><i class="fas fa-boxes-stacked"></i>
         Productos</a>
-      <a class="nav-item nav-link" href="./view/brands.jsp"><i class="fas fa-tag"></i> Marcas y
+      <a class="nav-item nav-link" href="<s:url action="cb" />"><i class="fas fa-tag"></i> Marcas y
         categorías</a>
     </div>
   </div>
@@ -41,7 +42,7 @@
   <!--ALERTA EN CASO NO HABER NINGÚN REGISTRO-->
   <div class="alert alert-warning">
     <strong>Aún no puedes registrar productos debido a que aún no cuentas con marcas ni categorías. <a
-            href="">Ir
+            href="<%=context%>/cb">Ir
       a Marcas y Categorías</a>
     </strong>
   </div>

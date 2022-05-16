@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<html lang="es">
+<% String context = request.getContextPath();%>
+<html lang="es" ng-app="inventory">
 
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--ANGULAR-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="<%=context%>/js/angular-route.js"></script>
     <!--BOOTSTRAP 4.6-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
@@ -17,19 +21,19 @@
     <title>Marcas y categorías</title>
 </head>
 
-<body style="font-family: Arial;">
+<body style="font-family: Arial; overflow: hidden;"  ng-controller="categoryController">
 <!--INICIO DEL TAB DE NAVEGACIÓN-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="../index.jsp">Gestor de Inventarios</a>
+    <a class="navbar-brand" href="<s:url action="index" />">Gestor de Inventarios</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link" href="../index.jsp"><i class="fas fa-boxes-stacked"></i>
+            <a class="nav-item nav-link" href="<s:url action="index" />"><i class="fas fa-boxes-stacked"></i>
                 Productos</a>
-            <a class="nav-item nav-link active" href="./brands.jsp"><i class="fas fa-tag"></i> Marcas y
+            <a class="nav-item nav-link active" href="<s:url action="cb" />"><i class="fas fa-tag"></i> Marcas y
                 categorías</a>
         </div>
     </div>
@@ -39,7 +43,7 @@
 <!--INICIO DEL CONTENIDO DE LA PÁGINA-->
 <div class="block m-4">
     <div class="row">
-        <div class="col-12 col-lg-6 px-lg-4">
+        <div class="col-12 col-lg-8 px-lg-4">
             <!--INICIO DEL APARTADO DE MARCAS-->
             <div class="row d-flex align-items-start">
                 <div class="col-6">
@@ -53,7 +57,7 @@
             </div>
             <hr class="mt-0">
             <div class="row">
-                <div class="col-6">
+                <div class="col-4">
                     <div class="card mb-4 shadow">
                         <img class="px-3 mt-2 mb-0" style="width: 100%; height: 100px; object-fit: contain;"
                              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW3Fo_F49duftR_cxgdyo9eEoykLjlZy7txKomKRnckcxtdPtBYH1jk_KqTCw-PE0gLTk&usqp=CAU"
@@ -73,7 +77,7 @@
                     </div>
                 </div>
 
-                <div class="col-6">
+                <div class="col-4">
                     <div class="card mb-4 shadow">
                         <img class="px-3 mt-2 mb-0" style="width: 100%; height: 100px; object-fit: contain;"
                              src="https://mma.prnewswire.com/media/1320682/October_27___Rubik_s_Logo_3.jpg?p=facebook"
@@ -96,58 +100,42 @@
             <!--FIN DEL APARTADO DE MARCAS-->
         </div>
 
-        <div class="col-12 col-lg-6 px-lg-4">
-            <!--INICIO DEL APARTADO DE MARCAS-->
+        <div class="col-12 col-lg-4 px-lg-4">
+            <!--INICIO DEL APARTADO DE CATEGORÍAS-->
             <div class="row d-flex align-items-start">
                 <div class="col-6">
                     <h1>Categorías</h1>
                 </div>
                 <div class="col-6 text-right">
-                    <button data-target="#addModal" data-toggle="modal" class="btn btn-outline-success"><i
+                    <button data-target="#addCategory" data-toggle="modal" class="btn btn-outline-success"><i
                             class="fas fa-plus"></i>
                         Añadir</button>
                 </div>
             </div>
             <hr class="mt-0">
-            <div class="block">
-                <div class="card mb-4 shadow">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-8">
-                                <span>Nombre de la categoría</span>
-                            </div>
-                            <div class="col-4 text-right">
-                                <big>
-                                    <i role="button" title="Eliminar Producto" data-target="#removeModal"
-                                       data-toggle="modal" class="fas fa-trash mr-3 text-danger"></i>
-                                    <i role="button" title="Editar Datos" data-target="#modifyModal"
-                                       data-toggle="modal" class="fas fa-edit mr-3 text-primary"></i>
-                                    <i role="button" title="Mas Información" data-toggle="modal"
-                                       data-target="#addQuantityModal" class="fas fa-info-circle text-primary"></i>
-                                </big>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-8">
-                                <span>Nombre de la categoría</span>
-                            </div>
-                            <div class="col-4 text-right">
-                                <big>
-                                    <i role="button" title="Eliminar Producto" data-target="#removeModal"
-                                       data-toggle="modal" class="fas fa-trash mr-3 text-danger"></i>
-                                    <i role="button" title="Editar Datos" data-target="#modifyModal"
-                                       data-toggle="modal" class="fas fa-edit mr-3 text-primary"></i>
-                                    <i role="button" title="Mas Información" data-toggle="modal"
-                                       data-target="#addQuantityModal" class="fas fa-info-circle text-primary"></i>
-                                </big>
+            <div style="height: 75%; overflow: auto;">
+                <div class="block">
+                    <!--INICIO DE LA TARJETA DE CATEGORÍA-->
+                    <s:iterator value="categories" >
+                        <div class="card mb-4 shadow">
+                            <div class="card-body">
+                                <h3 class="mt-0"><i class="fas fa-<s:property value="iconName" />"></i> <s:property value="name" /> <s:property value="id" /></h3>
+                                <div class="row mb-0">
+                                    <div class="col-8">
+                                        <span><s:property value="description" /></span>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <big>
+                                            <i role="button" onclick="setIdOnModal(<s:property value="id" />)" title="Eliminar Producto" data-target="#removeCategory"
+                                               data-toggle="modal" class="fas fa-trash mr-3 text-danger"></i>
+                                            <i role="button" ng-click="getInfo(<s:property value="id" />)" title="Editar Datos" data-target="#modifyCategory"
+                                               data-toggle="modal" class="fas fa-edit text-primary"></i>
+                                        </big>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </s:iterator>
                 </div>
             </div>
             <!--FIN DEL APARTADO DE MARCAS-->
@@ -156,64 +144,57 @@
 </div>
 <!--FIN DEL CONTENIDO DE LA PÁGINA-->
 
-<!--INICIO MODAL DE REGISTRO-->
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+<!--INICIO MODAL DE REGISTRO CATEGORÍA-->
+<div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content" style="border: none !important;">
-            <div class="card">
-                <div class="card-body">
-                    <h3><i class="fas fa-plus text-right"></i> Registrar producto</h3>
-                    <hr>
-                    <form action="">
-                        <div class="row">
-                            <div class="form-group col-12">
-                                <label for="name">Nombre del producto <span class="text-danger">*</span></label>
-                                <input type="text" id="name" name="name" placeholder="Ej. Cinta americana"
-                                       class="form-control" autocomplete="off" required>
-                            </div>
-                            <div class="form-group col-6">
-                                <label for="price">Precio <span class="text-danger">*</span></label>
-                                <input type="number" id="price" name="price" placeholder="Min. $1"
-                                       class="form-control" min="1" autocomplete="off" required>
-                            </div>
-                            <div class="form-group col-6">
-                                <label for="quantity">Ejemplares <span class="text-danger">*</span></label>
-                                <input type="number" id="quantity" name="quantity" placeholder="Min. 1 unidad"
-                                       class="form-control" min="1" autocomplete="off" required>
-                            </div>
-                            <div class="form-group col-12">
-                                <label for="url">Url de la imagen <span class="text-danger">*</span></label>
-                                <input type="text" id="url" name="url" placeholder="Ej.http://dominio.com"
-                                       class="form-control" min="1" autocomplete="off" required>
-                            </div>
-                            <div class="form-group col-12">
-                                <label for="category">Categoría <span class="text-danger">*</span></label>
-                                <select class="form-control" name="category" id="category">
-                                    <option selected disabled>Seleccione una categoría</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-12">
-                                <label for="description">Descripción del producto</label>
-                                <textarea placeholder="Escribe algo... (Opcional)" style="resize: none;"
-                                          name="description" id="description" class="form-control" rows="5"></textarea>
-                            </div>
-                        </div>
+            <form action="<%=context%>/addCategory" method="post">
+                <div class="card">
+                    <div class="card-body">
+                        <h3><i class="fas fa-plus text-right"></i> Registrar categoría</h3>
                         <hr>
-                        <div class="block text-right">
-                            <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary">Guardar</button>
-                        </div>
-                    </form>
+                        <form action="">
+                            <div class="row">
+                                <div class="form-group col-12 col-lg-6">
+                                    <label for="cName">Nombre de la categoría <span class="text-danger">*</span></label>
+                                    <input type="text" id="cName" name="cName" placeholder="Ej. Electrodomésticos"
+                                           class="form-control" autocomplete="off" required>
+                                </div>
+                                <div class="form-group col-12 col-lg-6">
+                                    <label for="cIconName">Nombre del ícono de la categoría <span class="text-danger text-justify">*</span></label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">fas fa-</span>
+                                        </div>
+                                        <input type="text" id="cIconName" name="cIconName" placeholder="Nombre del ícono"
+                                               class="form-control" autocomplete="off" required>
+                                    </div>
+                                    <small class="text-muted"><strong>NOTA:</strong> El nombre del icono lo puedes sacar de su sitio web <a
+                                            href="https://fontawesome.com/v6/search" target="_blank">Font Awesome v6</a></small>
+                                </div>
+                                <div class="form-group col-12">
+                                    <label for="cDescription">Descripción de la categoría</label>
+                                    <input type="text" id="cDescription" name="cDescription" placeholder="Escriba algo breve..."
+                                           class="form-control" autocomplete="off" required>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="block text-right">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
 <!--FIN MODAL DE REGISTRO-->
 
-<!--INICIO MODAL DE MODIFICACIÓN-->
-<div class="modal fade" id="modifyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+<!--INICIO MODAL DE MODIFICACIÓN DE CATEGORÍA-->
+<div class="modal fade" id="modifyCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content" style="border: none !important;">
             <div class="card">
                 <div class="card-body">
@@ -221,36 +202,27 @@
                     <hr>
                     <form action="">
                         <div class="row">
-                            <div class="form-group col-12">
-                                <label for="name">Nombre del producto <span class="text-danger">*</span></label>
-                                <input type="text" id="name" name="name" placeholder="Ej. Cinta americana"
+                            <div class="form-group col-12 col-lg-6">
+                                <label for="uName">Nombre de la categoría <span class="text-danger">*</span></label>
+                                <input type="text" id="uName" name="uName" placeholder="Ej. Electrodomésticos"
                                        class="form-control" autocomplete="off" required>
                             </div>
-                            <div class="form-group col-6">
-                                <label for="price">Precio <span class="text-danger">*</span></label>
-                                <input type="number" id="price" name="price" placeholder="Min. $1"
-                                       class="form-control" min="1" autocomplete="off" required>
-                            </div>
-                            <div class="form-group col-6">
-                                <label for="quantity">Ejemplares <span class="text-danger">*</span></label>
-                                <input type="number" id="quantity" name="quantity" placeholder="Min. 1 unidad"
-                                       class="form-control" min="1" autocomplete="off" required>
-                            </div>
-                            <div class="form-group col-12">
-                                <label for="url">Url de la imagen <span class="text-danger">*</span></label>
-                                <input type="text" id="url" name="url" placeholder="Ej.http://dominio.com"
-                                       class="form-control" min="1" autocomplete="off" required>
+                            <div class="form-group col-12 col-lg-6">
+                                <label for="uIconName">Nombre del ícono de la categoría <span class="text-danger text-justify">*</span></label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">fas fa-</span>
+                                    </div>
+                                    <input type="text" id="uIconName" name="uIconName" placeholder="Nombre del ícono"
+                                           class="form-control" autocomplete="off" required>
+                                </div>
+                                <small class="text-muted"><strong>NOTA:</strong> El nombre del icono lo puedes sacar de su sitio web <a
+                                        href="https://fontawesome.com/v6/search" target="_blank">Font Awesome v6</a></small>
                             </div>
                             <div class="form-group col-12">
-                                <label for="category">Categoría <span class="text-danger">*</span></label>
-                                <select class="form-control" name="category" id="category">
-                                    <option selected disabled>Seleccione una categoría</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-12">
-                                <label for="description">Descripción del producto</label>
-                                <textarea placeholder="Escribe algo... (Opcional)" style="resize: none;"
-                                          name="description" id="description" class="form-control" rows="5"></textarea>
+                                <label for="uDescription">Descripción de la categoría</label>
+                                <input type="text" id="uDescription" name="uDescription" placeholder="Escriba algo breve..."
+                                       class="form-control" autocomplete="off" required>
                             </div>
                         </div>
                         <hr>
@@ -266,77 +238,8 @@
 </div>
 <!--FIN MODAL DE MODIFICACIÓN-->
 
-<!--INICIO MODAL DE AGREGACIÓN-->
-<div class="modal fade" id="addQuantityModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="border: none !important;">
-            <div class="card">
-                <div class="card-body">
-                    <h3><i class="fas fa-plus text-right"></i> Añadir ejemplares</h3>
-                    <hr>
-                    <form action="">
-                        <div class="row">
-                            <div class="col-12 mb-3">
-                                Nombre del producto:
-                                <h4>Cubo Rubik 3x3 - Fibra de Carbono</h4>
-                            </div>
-                            <div class="col-12">
-                                <p class="mb-2">Total de unidades:</p>
-                                <div class="input-group">
-                                    <input type="number" class="form-control text-center" disabled value="300"
-                                           name="" id="">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-plus"></i></span>
-                                    </div>
-                                    <input type="number" placeholder="Unidades a agregar"
-                                           class="form-control text-center" pattern="[0-9]+" name="" id="">
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="block text-right">
-                            <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary">Agregar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--FIN MODAL DE AGREGACIÓN-->
-
-<!--INICIO MODAL DE INFORMACIÓN-->
-<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="border: none !important;">
-            <div class="card">
-                <div class="card-body">
-                    <h3><i class="fas fa-info-circle"></i> Información del producto</h3>
-                    <hr>
-                    <form action="">
-                        <p>
-                            <strong>Marca: </strong>Rubik's Cubes
-                        </p>
-                        <p class="text-justify">
-                            <strong>Descripción del producto:</strong> Lorem ipsum dolor sit amet consectetur
-                            adipisicing elit. Consectetur omnis iusto dolores tempore. Incidunt a tempora repellat
-                            iusto velit amet beatae eos cupiditate, illum, quos sunt ducimus, minima cumque quasi!
-                        </p>
-                        <hr>
-                        <div class="block text-right">
-                            <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--FIN MODAL DE INFORMACIÓN-->
-
 <!--INICIO MODAL ELIMINACIÓN-->
-<div class="modal fade" id="removeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="removeCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" style="border: none !important;">
             <div class="card">
@@ -344,11 +247,14 @@
                     <h3><i class="fas fa-triangle-exclamation"></i> Atención</h3>
                     <hr>
                     <form action="">
-                        Esta acción es irreversible ¿Está seguro que desea realizar esta acción?
+                        Esta acción es irreversible ¿Está seguro que desea eliminar esta categoría?
                         <hr>
                         <div class="block text-right">
-                            <button class="btn btn-danger">Eliminar</button>
-                            <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <form action="<%=context%>/removeCategory" method="post">
+                                <input type="hidden" id="cId" name="cId">
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         </div>
                     </form>
                 </div>
@@ -359,6 +265,7 @@
 <!--FIN MODAL DE ELIMINACIÓN-->
 </body>
 
+<script src="<%=context%>/js/functions.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

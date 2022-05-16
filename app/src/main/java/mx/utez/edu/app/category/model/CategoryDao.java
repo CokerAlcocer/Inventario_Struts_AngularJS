@@ -23,6 +23,7 @@ public class CategoryDao {
                 Category c = new Category(
                         rs.getInt("id"),
                         rs.getString("name"),
+                        rs.getString("icon_name"),
                         rs.getString("description")
                 );
 
@@ -37,51 +38,78 @@ public class CategoryDao {
     }
 
     public Category findById(int id) {
-        boolean flag;
+        Category c = new Category();
         try {
-
+            con = DatabaseConnection.getConnection();
+            String query = "SELECT * FROM category WHERE id = ?";
+            pstm = con.prepareStatement(query);
+            pstm.setInt(1, id);
+            rs = pstm.executeQuery();
+            if(rs.next()){
+                c.setId(rs.getInt("id"));
+                c.setName(rs.getString("name"));
+                c.setIconName(rs.getString("icon_name"));
+                c.setDescription(rs.getString("description"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
         }
-        return flag;
+        return c;
     }
 
-    public boolean save() {
-        List<Category> categories = new ArrayList<>();
+    public boolean save(Category c) {
+        System.out.println(c.getName());
+        boolean state = false;
         try {
-
+            con = DatabaseConnection.getConnection();
+            String query = "INSERT INTO category(name, icon_name, description) VALUES(?, ?, ?)";
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, c.getName());
+            pstm.setString(2, c.getIconName());
+            pstm.setString(3, c.getDescription());
+            state = pstm.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
         }
-        return
+        return state;
     }
 
-    public boolean update(int id) {
-        List<Category> categories = new ArrayList<>();
+    public boolean update(Category c) {
+        boolean state = false;
         try {
-
+            con = DatabaseConnection.getConnection();
+            String query = "UPDATE category SET name = ?, icon_name = ?, description = ? WHERE id = ?";
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, c.getName());
+            pstm.setString(2, c.getIconName());
+            pstm.setString(3, c.getDescription());
+            pstm.setInt(4, c.getId());
+            state = pstm.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
         }
-        return
+        return state;
     }
 
     public boolean delete(int id) {
-        List<Category> categories = new ArrayList<>();
+        boolean state = false;
         try {
-
+            con = DatabaseConnection.getConnection();
+            String query = "DELETE FROM category WHERE id = ?";
+            pstm.setInt(1, id);
+            state = pstm.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
         }
-        return
+        return state;
     }
 
     public void closeConnection(){

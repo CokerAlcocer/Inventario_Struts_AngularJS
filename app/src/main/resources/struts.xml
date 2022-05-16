@@ -7,10 +7,33 @@
 
     <constant name="struts.devMode" value="true" />
 
-    <package name="basicstruts2" extends="struts-default">
+    <package name="navigation" extends="struts-default">
         <action name="index">
             <result>/index.jsp</result>
         </action>
+
+        <action name="cb" class="mx.utez.edu.app.extras.CategoryBrandAction" method="findAllBoth">
+            <result name="success">/view/brands.jsp</result>
+        </action>
+
+        <action name="addCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="save">
+            <result name="success">/view/brands.jsp</result>
+        </action>
+
+        <action name="removeCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="delete">
+            <result name="success">/view/brands.jsp</result>
+        </action>
     </package>
 
+    <package name="api" namespace="/api" extends="json-default">
+        <interceptors>
+            <interceptor-stack name="myStack">
+                <interceptor-ref name="json" />
+            </interceptor-stack>
+        </interceptors>
+
+        <action name="findCategoryById" class="mx.utez.edu.app.extras.CategoryBrandAction" method="findAllCategories">
+            <result name="success" type="json" />
+        </action>
+    </package>
 </struts>

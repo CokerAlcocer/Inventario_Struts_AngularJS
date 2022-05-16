@@ -20,9 +20,11 @@ USE `inventory` ;
 CREATE TABLE IF NOT EXISTS `inventory`.`category` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
+  `icon_name` VARCHAR(50) NOT NULL,
   `description` TEXT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE)
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE,
+  UNIQUE INDEX `icon_name_UNIQUE` (`icon_name` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -64,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`product` (
     REFERENCES `inventory`.`category` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = ndbcluster;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
