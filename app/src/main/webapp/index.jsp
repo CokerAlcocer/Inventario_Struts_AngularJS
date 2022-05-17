@@ -11,6 +11,7 @@
   <!--BOOTSTRAP 4.6-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.2/font/bootstrap-icons.min.css" integrity="sha512-YzwGgFdO1NQw1CZkPoGyRkEnUTxPSbGWXvGiXrWk8IeSqdyci0dEDYdLLjMxq1zCoU0QBa4kHAFiRhUL3z2bow==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!--FONTAWESOME ICONS 6.1.1-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -20,7 +21,7 @@
 
 <body style="font-family: Arial;">
 <!--INICIO DEL TAB DE NAVEGACIÓN-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
   <a class="navbar-brand" href="<s:url action="index" />">Gestor de Inventarios</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
           aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,10 +29,10 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="<s:url action="index" />"><i class="fas fa-boxes-stacked"></i>
+      <a class="nav-item nav-link active" href="<s:url action="index" />"><i class="bi bi-basket-fill"></i>
         Productos</a>
-      <a class="nav-item nav-link" href="<s:url action="cb" />"><i class="fas fa-tag"></i> Marcas y
-        categorías</a>
+      <a class="nav-item nav-link" href="<s:url action="cb#brands" />"><i class="fas fa-tag"></i> Marcas</a>
+      <a class="nav-item nav-link" href="<s:url action="cb#categories" />"><i class="bi bi-circle-square"></i> Categorías</a>
     </div>
   </div>
 </nav>

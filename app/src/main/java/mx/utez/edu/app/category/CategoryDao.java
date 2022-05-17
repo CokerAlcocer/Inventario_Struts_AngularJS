@@ -1,4 +1,4 @@
-package mx.utez.edu.app.category.model;
+package mx.utez.edu.app.category;
 
 import mx.utez.edu.app.utils.DatabaseConnection;
 
@@ -97,20 +97,14 @@ public class CategoryDao {
         return state;
     }
 
-    public boolean delete(Category c) {
-        System.out.println("\n\n\n\n\n\n");
-        System.out.println("3");
-        System.out.println("\n\n\n\n\n\n");
+    public boolean delete(int id) {
         boolean state = false;
         try {
             con = DatabaseConnection.getConnection();
             String query = "DELETE FROM category WHERE id = ?";
             pstm = con.prepareStatement(query);
-            pstm.setInt(1, c.getId());
+            pstm.setInt(1, id);
             state = pstm.executeUpdate() == 1;
-            System.out.println("\n\n\n\n\n\n");
-            System.out.println("4");
-            System.out.println("\n\n\n\n\n\n");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

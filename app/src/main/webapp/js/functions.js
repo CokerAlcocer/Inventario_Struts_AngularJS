@@ -1,11 +1,12 @@
-
 const setIdOnModal = (id) => {
     console.log(id)
     document.getElementById('cId').value = id;
 }
 
-const app = angular.module("inventory", ['ngRoute']);
-app.controller("categoryController", ($scope, $http) => {
+const app = angular.module("inventory", []);
+app.controller("categoryController", ($scope, $http, $sce) => {
+    console.log($scope)
+
     $scope.getInfo = (id) => {
         $http({
             method: 'GET',
@@ -13,9 +14,9 @@ app.controller("categoryController", ($scope, $http) => {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             url: 'http://localhost:8080/inventory/api/findCategoryById'
-        }).then(function successCallback(res){
-            for(let i = 0; i < res.data.categories.length; i++){
-                if(res.data.categories[i].id === id){
+        }).then(function successCallback(res) {
+            for (let i = 0; i < res.data.categories.length; i++) {
+                if (res.data.categories[i].id === id) {
                     $scope.uId = res.data.categories[i].id;
                     $scope.uName = res.data.categories[i].name;
                     $scope.uIconName = res.data.categories[i].iconName;
@@ -25,6 +26,6 @@ app.controller("categoryController", ($scope, $http) => {
             }
         }, function errorCallback(res) {
             console.log(res)
-        });
+        })
     }
-});
+})

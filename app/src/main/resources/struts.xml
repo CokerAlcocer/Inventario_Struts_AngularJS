@@ -5,28 +5,39 @@
 
 <struts>
 
+    <constant name="struts.action.extension" value="," />
     <constant name="struts.devMode" value="true" />
 
     <package name="navigation" extends="struts-default">
+
+        <!--NAVEGACION PRODUCTOS-->
         <action name="index">
             <result>/index.jsp</result>
         </action>
 
+        <!--NAVEGACION MARCAS Y CATEGORÍAS-->
         <action name="cb" class="mx.utez.edu.app.extras.CategoryBrandAction" method="findAllBoth">
             <result name="success">/view/brands.jsp</result>
         </action>
 
-        <action name="addCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="save">
+        <!--NAVEGACION MARCAS-->
+        <action name="addBrand" class="mx.utez.edu.app.extras.CategoryBrandAction" method="saveBrand">
             <result name="success">/view/brands.jsp</result>
             <result name="fail">/view/brands.jsp</result>
         </action>
 
-        <action name="removeCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="remove">
+        <!--NAVEGACION CATEGORIAS-->
+        <action name="addCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="saveCategory">
             <result name="success">/view/brands.jsp</result>
-            <result name="fail">/index.jsp</result>
+            <result name="fail">/view/brands.jsp</result>
         </action>
 
-        <action name="updateCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="update">
+        <action name="removeCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="removeCategory">
+            <result name="success">/view/brands.jsp</result>
+            <result name="fail">/view/brands.jsp</result>
+        </action>
+
+        <action name="updateCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="updateCategory">
             <result name="success">/view/brands.jsp</result>
             <result name="fail">/view/brands.jsp</result>
         </action>

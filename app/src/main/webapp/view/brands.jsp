@@ -14,6 +14,7 @@
     <!--BOOTSTRAP 4.6-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.2/font/bootstrap-icons.min.css" integrity="sha512-YzwGgFdO1NQw1CZkPoGyRkEnUTxPSbGWXvGiXrWk8IeSqdyci0dEDYdLLjMxq1zCoU0QBa4kHAFiRhUL3z2bow==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--FONTAWESOME ICONS 6.1.1-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
           integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -23,7 +24,7 @@
 
 <body style="font-family: Arial;" class="overflow-auto" ng-controller="categoryController">
 <!--INICIO DEL TAB DE NAVEGACIÓN-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="<s:url action="index" />">Gestor de Inventarios</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,96 +32,86 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link" href="<s:url action="index" />"><i class="fas fa-boxes-stacked"></i>
+            <a class="nav-item nav-link" href="<s:url action="index" />"><i class="bi bi-basket-fill"></i>
                 Productos</a>
-            <a class="nav-item nav-link active" href="<s:url action="cb" />"><i class="fas fa-tag"></i> Marcas y
-                categorías</a>
+            <a class="nav-item nav-link active" href="<s:url action="cb#brands" />"><i class="fas fa-tag"></i> Marcas</a>
+            <a class="nav-item nav-link active" href="<s:url action="cb#categories" />"><i class="bi bi-circle-square"></i> Categorías</a>
         </div>
     </div>
 </nav>
 <!--FIN DEL TAB DE NAVEGACIÓN-->
 
 <!--INICIO DEL CONTENIDO DE LA PÁGINA-->
-<div class="block m-4">
+<div class="block mx-4" style="margin-top: 80px;">
     <div class="row">
-        <div class="col-12 col-lg-8 px-lg-4">
+        <div class="col-12 col-lg-8 px-lg-4" id="brands">
             <!--INICIO DEL APARTADO DE MARCAS-->
-            <div class="row d-flex align-items-start">
-                <div class="col-6">
-                    <h1>Marcas</h1>
+            <s:if test="brands.size() <= 0 || brands == null">
+                <div class="alert alert-warning">
+                    <strong>No hay marcas registradas. <a href="#addBrand" data-toggle="modal">¡Registra una nueva!</a></strong>
                 </div>
-                <div class="col-6 text-right">
-                    <button data-target="#addModal" data-toggle="modal" class="btn btn-outline-success"><i
-                            class="fas fa-plus"></i>
-                        Añadir</button>
-                </div>
-            </div>
-            <hr class="mt-0">
-            <div class="row">
-                <div class="col-4">
-                    <div class="card mb-4 shadow">
-                        <img class="px-3 mt-2 mb-0" style="width: 100%; height: 100px; object-fit: contain;"
-                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW3Fo_F49duftR_cxgdyo9eEoykLjlZy7txKomKRnckcxtdPtBYH1jk_KqTCw-PE0gLTk&usqp=CAU"
-                             alt="">
-                        <div class="card-body mt-0 text-center">
-                            <div class="col-12 mt-0">
-                                <big>
-                                    <i role="button" title="Eliminar Producto" data-target="#removeModal"
-                                       data-toggle="modal" class="fas fa-trash mr-3 text-danger"></i>
-                                    <i role="button" title="Editar Datos" data-target="#modifyModal"
-                                       data-toggle="modal" class="fas fa-edit mr-3 text-primary"></i>
-                                    <i role="button" title="Mas Información" data-toggle="modal"
-                                       data-target="#addQuantityModal" class="fas fa-info-circle text-primary"></i>
-                                </big>
-                            </div>
-                        </div>
+            </s:if>
+            <s:else>
+                <div class="row d-flex align-items-center">
+                    <div class="col-6">
+                        <h1>Marcas</h1>
+                    </div>
+                    <div class="col-6 text-right">
+                        <h1><i role="button" data-target="#addBrand" data-toggle="modal" class="fas fa-plus text-success"></i></h1>
                     </div>
                 </div>
-
-                <div class="col-4">
-                    <div class="card mb-4 shadow">
-                        <img class="px-3 mt-2 mb-0" style="width: 100%; height: 100px; object-fit: contain;"
-                             src="https://mma.prnewswire.com/media/1320682/October_27___Rubik_s_Logo_3.jpg?p=facebook"
-                             alt="">
-                        <div class="card-body mt-0 text-center">
-                            <div class="col-12 mt-0">
-                                <big>
-                                    <i role="button" title="Eliminar Producto" data-target="#removeModal"
-                                       data-toggle="modal" class="fas fa-trash mr-3 text-danger"></i>
-                                    <i role="button" title="Editar Datos" data-target="#modifyModal"
-                                       data-toggle="modal" class="fas fa-edit mr-3 text-primary"></i>
-                                    <i role="button" title="Mas Información" data-toggle="modal"
-                                       data-target="#addQuantityModal" class="fas fa-info-circle text-primary"></i>
-                                </big>
+                <hr class="mt-0">
+                <div class="row">
+                    <s:iterator value="brands">
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <div class="card mb-4 shadow">
+                                <img class="px-3 mt-2 mb-0" style="width: 100%; height: 100px; object-fit: contain;"
+                                     src="<s:property value="imageUrl" />"
+                                     alt="">
+                                <div class="card-body mt-0 text-center">
+                                    <div class="col-12 mt-0">
+                                        <big>
+                                            <i role="button" title="Eliminar Producto" data-target="#removeModal"
+                                               data-toggle="modal" class="fas fa-trash mr-3 text-danger"></i>
+                                            <i role="button" title="Editar Datos" data-target="#modifyModal"
+                                               data-toggle="modal" class="fas fa-edit mr-3 text-primary"></i>
+                                            <i role="button" title="Mas Información" data-toggle="modal"
+                                               data-target="#addQuantityModal" class="fas fa-info-circle text-primary"></i>
+                                        </big>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </s:iterator>
                 </div>
-            </div>
+            </s:else>
             <!--FIN DEL APARTADO DE MARCAS-->
         </div>
 
-        <div class="col-12 col-lg-4 px-lg-4">
+        <div class="col-12 col-lg-4 px-lg-4" id="categories">
             <!--INICIO DEL APARTADO DE CATEGORÍAS-->
-            <div class="row d-flex align-items-start">
-                <div class="col-6">
-                    <h1>Categorías</h1>
+            <s:if test="categories.size() <= 0 || categories == null">
+                <div class="alert alert-warning">
+                    <strong>No hay categorías registradas. <a href="#addCategory" data-toggle="modal">¡Registra una nueva!</a></strong>
                 </div>
-                <div class="col-6 text-right">
-                    <button data-target="#addCategory" data-toggle="modal" class="btn btn-outline-success"><i
-                            class="fas fa-plus"></i>
-                        Añadir</button>
+            </s:if>
+            <s:else>
+                <div class="row d-flex align-items-center">
+                    <div class="col-6">
+                        <h1>Categorías</h1>
+                    </div>
+                    <div class="col-6 text-right">
+                        <h1><i role="button" data-target="#addCategory" data-toggle="modal" class="fas fa-plus text-success"></i></h1>
+                    </div>
                 </div>
-            </div>
-            <hr class="mt-0">
-            <div style="height: 72%;" class="overflow-auto">
+                <hr class="mt-0">
                 <div class="block">
                     <!--INICIO DE LA TARJETA DE CATEGORÍA-->
                     <s:iterator value="categories" >
-                        <div class="card mb-4 mx-3 shadow">
+                        <div class="card mb-4 shadow">
                             <div class="card-body">
                                 <h3 class="mt-0"><i class="fas fa-<s:property value="iconName" />"></i> <s:property value="name" /></h3>
-                                <div class="row mb-0">
+                                <div class="row mb-0  d-flex align-items-end">
                                     <div class="col-8">
                                         <span><s:property value="description" /></span>
                                     </div>
@@ -137,53 +128,91 @@
                         </div>
                     </s:iterator>
                 </div>
-            </div>
+            </s:else>
             <!--FIN DEL APARTADO DE MARCAS-->
         </div>
     </div>
 </div>
 <!--FIN DEL CONTENIDO DE LA PÁGINA-->
 
+<!--INICIO MODAL DE REGISTRO MARCA-->
+<div class="modal fade" id="addBrand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0">
+            <form action="<%=context%>/addBrand" method="post">
+                <div class="card border-0">
+                    <div class="card-header pb-1 bg-dark text-white">
+                        <h3><i class="fas fa-plus text-right"></i> Registrar marca</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="bName">Nombre de la marca <span class="text-danger">*</span></label>
+                            <input type="text" id="bName" name="bName" placeholder="Ej. Nike"
+                                   class="form-control" autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bImageUrl">Url del logo de la marca <span class="text-danger">*</span></label>
+                            <input type="text" id="bImageUrl" name="bImageUrl" placeholder="No usar url's largas"
+                                   class="form-control" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--FIN MODAL DE REGISTRO-->
+
 <!--INICIO MODAL DE REGISTRO CATEGORÍA-->
 <div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content" style="border: none !important;">
+        <div class="modal-content border-0">
             <form action="<%=context%>/addCategory" method="post">
-                <div class="card">
-                    <div class="card-body">
+                <div class="card border-0">
+                    <div class="card-header pb-1 bg-dark text-white">
                         <h3><i class="fas fa-plus text-right"></i> Registrar categoría</h3>
-                        <hr>
-                        <form action="">
-                            <div class="row">
-                                <div class="form-group col-12 col-lg-6">
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group">
                                     <label for="cName">Nombre de la categoría <span class="text-danger">*</span></label>
                                     <input type="text" id="cName" name="cName" placeholder="Ej. Electrodomésticos"
                                            class="form-control" autocomplete="off" required>
                                 </div>
-                                <div class="form-group col-12 col-lg-6">
+                                <div class="form-group">
+                                    <label for="cDescription">Descripción de la categoría</label>
+                                    <textarea placeholder="Escribe algo... (Opcional)" style="resize: none;"
+                                              name="cDescription" id="cDescription" class="form-control" rows="5"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group">
                                     <label for="cIconName">Nombre del ícono de la categoría <span class="text-danger text-justify">*</span></label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">fas fa-</span>
                                         </div>
-                                        <input type="text" id="cIconName" name="cIconName" placeholder="Nombre del ícono"
+                                        <input ng-model="cIconName" type="text" id="cIconName" name="cIconName" placeholder="Nombre del ícono"
                                                class="form-control" autocomplete="off" required>
                                     </div>
                                     <small class="text-muted"><strong>NOTA:</strong> El nombre del icono lo puedes sacar de su sitio web <a
                                             href="https://fontawesome.com/v6/search" target="_blank">Font Awesome v6</a></small>
                                 </div>
-                                <div class="form-group col-12">
-                                    <label for="cDescription">Descripción de la categoría</label>
-                                    <input type="text" id="cDescription" name="cDescription" placeholder="Escriba algo breve..."
-                                           class="form-control" autocomplete="off" required>
+                                <div class="form-group">
+                                    <label>Visualizador del ícono:</label>
+
                                 </div>
                             </div>
-                            <hr>
-                            <div class="block text-right">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                            </div>
-                        </form>
+                        </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </div>
             </form>
@@ -195,45 +224,48 @@
 <!--INICIO MODAL DE MODIFICACIÓN DE CATEGORÍA-->
 <div class="modal fade" id="modifyCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content" style="border: none !important;">
-            <div class="card">
-                <div class="card-body">
-                    <h3><i class="fas fa-edit text-right"></i> Modificar datos del producto</h3>
-                    <hr>
-                    <form action="<%=context%>/updateCategory">
+        <div class="modal-content border-0">
+            <form action="<%=context%>/updateCategory">
+                <div class="card border-0">
+                    <div class="card-header pb-1 bg-dark text-white">
+                        <h3><i class="fas fa-edit text-right"></i> Modificar datos de la categoría</h3>
+                    </div>
+                    <div class="card-body">
                         <input type="text" hidden ng-model="uId" id="uId" name="uId" />
                         <div class="row">
-                            <div class="form-group col-12 col-lg-6">
-                                <label for="uName">Nombre de la categoría <span class="text-danger">*</span></label>
-                                <input type="text" ng-model="uName" id="uName" name="uName" placeholder="Ej. Electrodomésticos"
-                                       class="form-control" autocomplete="off" required>
-                            </div>
-                            <div class="form-group col-12 col-lg-6">
-                                <label for="uIconName">Nombre del ícono de la categoría <span class="text-danger text-justify">*</span></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">fas fa-</span>
-                                    </div>
-                                    <input type="text" ng-model="uIconName" id="uIconName" name="uIconName" placeholder="Nombre del ícono"
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group">
+                                    <label for="uName">Nombre de la categoría <span class="text-danger">*</span></label>
+                                    <input type="text" ng-model="uName" id="uName" name="uName" placeholder="Ej. Electrodomésticos"
                                            class="form-control" autocomplete="off" required>
                                 </div>
-                                <small class="text-muted"><strong>NOTA:</strong> El nombre del icono lo puedes sacar de su sitio web <a
-                                        href="https://fontawesome.com/v6/search" target="_blank">Font Awesome v6</a></small>
+                                <div class="form-group">
+                                    <label for="uDescription">Descripción de la categoría</label>
+                                    <textarea placeholder="Escribe algo... (Opcional)" style="resize: none;" ng-model="uDescription" name="uDescription" id="uDescription" class="form-control" rows="5"></textarea>
+                                </div>
                             </div>
-                            <div class="form-group col-12">
-                                <label for="uDescription">Descripción de la categoría</label>
-                                <input type="text" ng-model="uDescription" id="uDescription" name="uDescription" placeholder="Escriba algo breve..."
-                                       class="form-control" autocomplete="off" required>
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group">
+                                    <label for="uIconName">Nombre del ícono de la categoría <span class="text-danger text-justify">*</span></label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">fas fa-</span>
+                                        </div>
+                                        <input type="text" ng-model="uIconName" id="uIconName" name="uIconName" placeholder="Nombre del ícono"
+                                               class="form-control" autocomplete="off" required>
+                                    </div>
+                                    <small class="text-muted"><strong>NOTA:</strong> El nombre del icono lo puedes sacar de su sitio web <a
+                                            href="https://fontawesome.com/v6/search" target="_blank">Font Awesome v6</a></small>
+                                </div>
                             </div>
                         </div>
-                        <hr>
-                        <div class="block text-right">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Descartar</button>
-                            <button type="submit" class="btn btn-primary">Modificar</button>
-                        </div>
-                    </form>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Descartar</button>
+                        <button type="submit" class="btn btn-primary">Modificar</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -242,22 +274,22 @@
 <!--INICIO MODAL ELIMINACIÓN-->
 <div class="modal fade" id="removeCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="border: none !important;">
-            <div class="card">
-                <div class="card-body">
-                    <h3><i class="fas fa-triangle-exclamation"></i> Atención</h3>
-                    <hr>
-                    Esta acción es irreversible ¿Está seguro que desea eliminar esta categoría?
-                    <hr>
-                    <div class="block text-right">
-                        <form action="<%=context%>/removeCategory" method="post">
-                            <input type="text" id="cId" name="cId">
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                        </form>
+        <div class="modal-content border-0">
+            <form action="<%=context%>/removeCategory" method="post">
+                <div class="card border-0">
+                    <div class="card-header pb-1 bg-dark text-white">
+                        <h3><i class="fas fa-triangle-exclamation"></i> Atención</h3>
+                    </div>
+                    <div class="card-body">
+                        <strong>Esta acción es irreversible</strong> ¿Está seguro que desea eliminar esta categoría?
+                    </div>
+                    <div class="card-footer text-right">
+                        <input type="text" hidden id="cId" name="cId">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

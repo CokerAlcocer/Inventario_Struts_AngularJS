@@ -1,0 +1,8 @@
+mx\utez\edu\app\utils\DatabaseConnection.class
+mx\utez\edu\app\brand\BrandDao.class
+mx\utez\edu\app\brand\Brand.class
+mx\utez\edu\app\category\Category.class
+mx\utez\edu\app\product\model\ProductDao.class
+mx\utez\edu\app\product\controller\ProductAction.class
+mx\utez\edu\app\category\CategoryDao.class
+mx\utez\edu\app\product\model\Product.class

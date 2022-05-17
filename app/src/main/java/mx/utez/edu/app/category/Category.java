@@ -1,4 +1,4 @@
-package mx.utez.edu.app.category.model;
+package mx.utez.edu.app.category;
 
 public class Category {
     private int id;

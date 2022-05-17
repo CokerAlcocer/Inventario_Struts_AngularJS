@@ -1,9 +1,10 @@
 package mx.utez.edu.app.extras;
 
 import com.opensymphony.xwork2.ActionSupport;
-import mx.utez.edu.app.brand.model.Brand;
-import mx.utez.edu.app.category.model.Category;
-import mx.utez.edu.app.category.model.CategoryDao;
+import mx.utez.edu.app.brand.Brand;
+import mx.utez.edu.app.brand.BrandDao;
+import mx.utez.edu.app.category.Category;
+import mx.utez.edu.app.category.CategoryDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,36 +25,55 @@ public class CategoryBrandAction extends ActionSupport {
     // --- Brand Variables ---
     // - Find -
     private List<Brand> brands;
+    // - Register -
+    private String bName, bImageUrl;
+    // - Remove -
+    private int bId;
+    // - Update -
+    private String uBrName, uBrImageUrl;
+    private int uBrId;
 
     // --- Action methods ---
-
     public String findAllBoth() {
-        System.out.println("\n\n\n\n\n\n");
-        System.out.println("2all");
-        System.out.println("\n\n\n\n\n\n");
         CategoryDao cd = new CategoryDao();
+        BrandDao bd = new BrandDao();
+
         categories = new ArrayList<>();
+        brands = new ArrayList<>();
+
         categories = cd.findAll();
-        if(categories.isEmpty()){
-            System.out.println("Empty table category...");
-        }else{
-            System.out.println("Found data: "+categories.size()+" rows...");
+        brands = bd.findAll();
+
+        return "success";
+    }
+
+    // --- Brand Methods ---
+    public String findAllBrands() {
+        BrandDao bd = new BrandDao();
+        brands = bd.findAll();
+        return "success";
+    }
+
+    public String saveBrand() {
+        BrandDao bd = new BrandDao();
+        Brand b = new Brand(bName, bImageUrl);
+        if(!bd.save(b)){
+            findAllBoth();
+            return "fail";
         }
+
+        findAllBoth();
         return "success";
     }
 
     // --- Category Methods ---
-
-    public String findAllCategories () {
+    public String findAllCategories() {
         CategoryDao cd = new CategoryDao();
         categories = cd.findAll();
         return "success";
     }
 
-    public String save() {
-        System.out.println("\n\n\n\n\n\n");
-        System.out.println("2s");
-        System.out.println("\n\n\n\n\n\n");
+    public String saveCategory() {
         CategoryDao cd = new CategoryDao();
         Category c = new Category(cName, cIconName, cDescription);
         if (!cd.save(c)){
@@ -64,10 +84,7 @@ public class CategoryBrandAction extends ActionSupport {
         return "success";
     }
 
-    public String update() {
-        System.out.println("\n\n\n\n\n\n");
-        System.out.println("2u");
-        System.out.println("\n\n\n\n\n\n");
+    public String updateCategory() {
         CategoryDao cd = new CategoryDao();
         Category c = new Category(uId, uName, uIconName, uDescription);
         if(!cd.update(c)){
@@ -79,24 +96,18 @@ public class CategoryBrandAction extends ActionSupport {
         return "success";
     }
 
-    public String remove() {
-        System.out.println("\n\n\n\n\n\n");
-        System.out.println("2");
-        System.out.println("\n\n\n\n\n\n");
+    public String removeCategory() {
         CategoryDao cd = new CategoryDao();
-        Category c = new Category(cId, "", "", "");
-        if (!cd.delete(c)){
+        if (!cd.delete(cId)){
             findAllBoth();
             return "fail";
         }
-        System.out.println("\n\n\n\n\n\n");
-        System.out.println("5");
-        System.out.println("\n\n\n\n\n\n");
+
+        findAllBoth();
         return "success";
     }
 
     // --- Brand Getters and setters ---
-
     public List<Brand> getBrands() {
         return brands;
     }
@@ -105,8 +116,55 @@ public class CategoryBrandAction extends ActionSupport {
         this.brands = brands;
     }
 
-    // --- Category Setters and Getters ---
+    public String getbName() {
+        return bName;
+    }
 
+    public void setbName(String bName) {
+        this.bName = bName;
+    }
+
+    public String getbImageUrl() {
+        return bImageUrl;
+    }
+
+    public void setbImageUrl(String bImageUrl) {
+        this.bImageUrl = bImageUrl;
+    }
+
+    public int getbId() {
+        return bId;
+    }
+
+    public void setbId(int bId) {
+        this.bId = bId;
+    }
+
+    public String getuBrName() {
+        return uBrName;
+    }
+
+    public void setuBrName(String uBrName) {
+        this.uBrName = uBrName;
+    }
+
+    public String getuBrImageUrl() {
+        return uBrImageUrl;
+    }
+
+    public void setuBrImageUrl(String uBrImageUrl) {
+        this.uBrImageUrl = uBrImageUrl;
+    }
+
+    public int getuBrId() {
+        return uBrId;
+    }
+
+    public void setuBrId(int uBrId) {
+        this.uBrId = uBrId;
+    }
+
+    // --- Category Setters and Getters ---
     public List<Category> getCategories() {
         return categories;
     }
@@ -144,9 +202,6 @@ public class CategoryBrandAction extends ActionSupport {
     }
 
     public void setcId(int cId) {
-        System.out.println("\n\n\n\n\n\n");
-        System.out.println("1");
-        System.out.println("\n\n\n\n\n\n");
         this.cId = cId;
     }
 
