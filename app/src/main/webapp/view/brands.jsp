@@ -119,7 +119,7 @@
                     <s:iterator value="categories" >
                         <div class="card mb-4 shadow">
                             <div class="card-body">
-                                <h3 class="mt-0"><i class="fas fa-<s:property value="iconName" />"></i> <s:property value="name" /> <s:property value="id" /></h3>
+                                <h3 class="mt-0"><i class="fas fa-<s:property value="iconName" />"></i> <s:property value="name" /></h3>
                                 <div class="row mb-0">
                                     <div class="col-8">
                                         <span><s:property value="description" /></span>
@@ -200,11 +200,12 @@
                 <div class="card-body">
                     <h3><i class="fas fa-edit text-right"></i> Modificar datos del producto</h3>
                     <hr>
-                    <form action="">
+                    <form action="<%=context%>/updateCategory">
+                        <input type="text" ng-model="uId" id="uId" name="uId" />
                         <div class="row">
                             <div class="form-group col-12 col-lg-6">
                                 <label for="uName">Nombre de la categoría <span class="text-danger">*</span></label>
-                                <input type="text" id="uName" name="uName" placeholder="Ej. Electrodomésticos"
+                                <input type="text" ng-model="uName" id="uName" name="uName" placeholder="Ej. Electrodomésticos"
                                        class="form-control" autocomplete="off" required>
                             </div>
                             <div class="form-group col-12 col-lg-6">
@@ -213,7 +214,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">fas fa-</span>
                                     </div>
-                                    <input type="text" id="uIconName" name="uIconName" placeholder="Nombre del ícono"
+                                    <input type="text" ng-model="uIconName" id="uIconName" name="uIconName" placeholder="Nombre del ícono"
                                            class="form-control" autocomplete="off" required>
                                 </div>
                                 <small class="text-muted"><strong>NOTA:</strong> El nombre del icono lo puedes sacar de su sitio web <a
@@ -221,14 +222,14 @@
                             </div>
                             <div class="form-group col-12">
                                 <label for="uDescription">Descripción de la categoría</label>
-                                <input type="text" id="uDescription" name="uDescription" placeholder="Escriba algo breve..."
+                                <input type="text" ng-model="uDescription" id="uDescription" name="uDescription" placeholder="Escriba algo breve..."
                                        class="form-control" autocomplete="off" required>
                             </div>
                         </div>
                         <hr>
                         <div class="block text-right">
-                            <button class="btn btn-secondary" data-dismiss="modal">Descartar</button>
-                            <button class="btn btn-primary">Modificar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Descartar</button>
+                            <button type="submit" class="btn btn-primary">Modificar</button>
                         </div>
                     </form>
                 </div>

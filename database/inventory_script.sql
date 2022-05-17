@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`product` (
     REFERENCES `inventory`.`category` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = ndbcluster;
+ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

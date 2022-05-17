@@ -18,10 +18,17 @@
 
         <action name="addCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="save">
             <result name="success">/view/brands.jsp</result>
+            <result name="fail">/view/brands.jsp</result>
+        </action>
+
+        <action name="updateCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="update">
+            <result name="success">/view/brands.jsp</result>
+            <result name="fail">/view/brands.jsp</result>
         </action>
 
         <action name="removeCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="delete">
             <result name="success">/view/brands.jsp</result>
+            <result name="fail">/view/brands.jsp</result>
         </action>
     </package>
 

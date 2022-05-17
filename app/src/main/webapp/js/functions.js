@@ -14,7 +14,15 @@ app.controller("categoryController", ($scope, $http) => {
             },
             url: 'http://localhost:8080/inventory/api/findCategoryById'
         }).then(function successCallback(res){
-            console.log(res)
+            for(let i = 0; i < res.data.categories.length; i++){
+                if(res.data.categories[i].id === id){
+                    $scope.uId = res.data.categories[i].id;
+                    $scope.uName = res.data.categories[i].name;
+                    $scope.uIconName = res.data.categories[i].iconName;
+                    $scope.uDescription = res.data.categories[i].description;
+                    break;
+                }
+            }
         }, function errorCallback(res) {
             console.log(res)
         });

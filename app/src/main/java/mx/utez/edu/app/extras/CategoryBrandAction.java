@@ -9,10 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryBrandAction extends ActionSupport {
-    private String cName, cIconName, cDescription;
-    private int cId;
-    private List<Brand> brands;
+
+    // --- Category Variables ---
+    // - Find -
     private List<Category> categories;
+    // - Register -
+    private String cName, cIconName, cDescription;
+    // - Remove -
+    private int cId;
+    // - Update -
+    private String uName, uIconName, uDescription;
+    private int uId;
+
+    // --- Brand Variables ---
+    // - Find -
+    private List<Brand> brands;
 
     // --- Action methods ---
 
@@ -40,8 +51,21 @@ public class CategoryBrandAction extends ActionSupport {
         CategoryDao cd = new CategoryDao();
         Category c = new Category(cName, cIconName, cDescription);
         if (!cd.save(c)){
+            findAllBoth();
             return "fail";
         }
+        findAllBoth();
+        return "success";
+    }
+
+    public String update() {
+        CategoryDao cd = new CategoryDao();
+        Category c = new Category(uId, uName, uIconName, uDescription);
+        if(!cd.update(c)){
+            findAllBoth();
+            return "fail";
+        }
+
         findAllBoth();
         return "success";
     }
@@ -49,14 +73,14 @@ public class CategoryBrandAction extends ActionSupport {
     public String delete() {
         CategoryDao cd = new CategoryDao();
         if (!cd.delete(cId)){
-            System.out.println("No se elimino");
+            findAllBoth();
             return "fail";
         }
         System.out.println("Se elimino");
         return "success";
     }
 
-    // --- Getters and setters
+    // --- Brand Getters and setters ---
 
     public List<Brand> getBrands() {
         return brands;
@@ -66,6 +90,8 @@ public class CategoryBrandAction extends ActionSupport {
         this.brands = brands;
     }
 
+    // --- Category Setters and Getters ---
+
     public List<Category> getCategories() {
         return categories;
     }
@@ -73,8 +99,6 @@ public class CategoryBrandAction extends ActionSupport {
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
-
-    // --- Category Setters and Getters ---
 
     public String getcName() {
         return cName;
@@ -106,5 +130,37 @@ public class CategoryBrandAction extends ActionSupport {
 
     public void setcId(int cId) {
         this.cId = cId;
+    }
+
+    public String getuName() {
+        return uName;
+    }
+
+    public void setuName(String uName) {
+        this.uName = uName;
+    }
+
+    public String getuIconName() {
+        return uIconName;
+    }
+
+    public void setuIconName(String uIconName) {
+        this.uIconName = uIconName;
+    }
+
+    public String getuDescription() {
+        return uDescription;
+    }
+
+    public void setuDescription(String uDescription) {
+        this.uDescription = uDescription;
+    }
+
+    public int getuId() {
+        return uId;
+    }
+
+    public void setuId(int uId) {
+        this.uId = uId;
     }
 }
