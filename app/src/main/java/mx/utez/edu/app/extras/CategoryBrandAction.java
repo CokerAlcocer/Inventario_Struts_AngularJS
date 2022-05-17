@@ -28,6 +28,9 @@ public class CategoryBrandAction extends ActionSupport {
     // --- Action methods ---
 
     public String findAllBoth() {
+        System.out.println("\n\n\n\n\n\n");
+        System.out.println("2all");
+        System.out.println("\n\n\n\n\n\n");
         CategoryDao cd = new CategoryDao();
         categories = new ArrayList<>();
         categories = cd.findAll();
@@ -48,6 +51,9 @@ public class CategoryBrandAction extends ActionSupport {
     }
 
     public String save() {
+        System.out.println("\n\n\n\n\n\n");
+        System.out.println("2s");
+        System.out.println("\n\n\n\n\n\n");
         CategoryDao cd = new CategoryDao();
         Category c = new Category(cName, cIconName, cDescription);
         if (!cd.save(c)){
@@ -59,6 +65,9 @@ public class CategoryBrandAction extends ActionSupport {
     }
 
     public String update() {
+        System.out.println("\n\n\n\n\n\n");
+        System.out.println("2u");
+        System.out.println("\n\n\n\n\n\n");
         CategoryDao cd = new CategoryDao();
         Category c = new Category(uId, uName, uIconName, uDescription);
         if(!cd.update(c)){
@@ -70,13 +79,19 @@ public class CategoryBrandAction extends ActionSupport {
         return "success";
     }
 
-    public String delete() {
+    public String remove() {
+        System.out.println("\n\n\n\n\n\n");
+        System.out.println("2");
+        System.out.println("\n\n\n\n\n\n");
         CategoryDao cd = new CategoryDao();
-        if (!cd.delete(cId)){
+        Category c = new Category(cId, "", "", "");
+        if (!cd.delete(c)){
             findAllBoth();
             return "fail";
         }
-        System.out.println("Se elimino");
+        System.out.println("\n\n\n\n\n\n");
+        System.out.println("5");
+        System.out.println("\n\n\n\n\n\n");
         return "success";
     }
 
@@ -129,6 +144,9 @@ public class CategoryBrandAction extends ActionSupport {
     }
 
     public void setcId(int cId) {
+        System.out.println("\n\n\n\n\n\n");
+        System.out.println("1");
+        System.out.println("\n\n\n\n\n\n");
         this.cId = cId;
     }
 

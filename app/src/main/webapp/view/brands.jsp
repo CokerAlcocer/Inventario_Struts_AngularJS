@@ -21,7 +21,7 @@
     <title>Marcas y categorías</title>
 </head>
 
-<body style="font-family: Arial; overflow: hidden;"  ng-controller="categoryController">
+<body style="font-family: Arial;" class="overflow-auto" ng-controller="categoryController">
 <!--INICIO DEL TAB DE NAVEGACIÓN-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="<s:url action="index" />">Gestor de Inventarios</a>
@@ -113,11 +113,11 @@
                 </div>
             </div>
             <hr class="mt-0">
-            <div style="height: 75%; overflow: auto;">
+            <div style="height: 72%;" class="overflow-auto">
                 <div class="block">
                     <!--INICIO DE LA TARJETA DE CATEGORÍA-->
                     <s:iterator value="categories" >
-                        <div class="card mb-4 shadow">
+                        <div class="card mb-4 mx-3 shadow">
                             <div class="card-body">
                                 <h3 class="mt-0"><i class="fas fa-<s:property value="iconName" />"></i> <s:property value="name" /></h3>
                                 <div class="row mb-0">
@@ -201,7 +201,7 @@
                     <h3><i class="fas fa-edit text-right"></i> Modificar datos del producto</h3>
                     <hr>
                     <form action="<%=context%>/updateCategory">
-                        <input type="text" ng-model="uId" id="uId" name="uId" />
+                        <input type="text" hidden ng-model="uId" id="uId" name="uId" />
                         <div class="row">
                             <div class="form-group col-12 col-lg-6">
                                 <label for="uName">Nombre de la categoría <span class="text-danger">*</span></label>
@@ -247,17 +247,15 @@
                 <div class="card-body">
                     <h3><i class="fas fa-triangle-exclamation"></i> Atención</h3>
                     <hr>
-                    <form action="">
-                        Esta acción es irreversible ¿Está seguro que desea eliminar esta categoría?
-                        <hr>
-                        <div class="block text-right">
-                            <form action="<%=context%>/removeCategory" method="post">
-                                <input type="hidden" id="cId" name="cId">
-                                <button type="submit" class="btn btn-danger">Eliminar</button>
-                            </form>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        </div>
-                    </form>
+                    Esta acción es irreversible ¿Está seguro que desea eliminar esta categoría?
+                    <hr>
+                    <div class="block text-right">
+                        <form action="<%=context%>/removeCategory" method="post">
+                            <input type="text" id="cId" name="cId">
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    </div>
                 </div>
             </div>
         </div>

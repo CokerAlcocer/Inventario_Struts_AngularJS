@@ -10,7 +10,7 @@ public class DatabaseConnection {
     public static Connection getConnection() throws SQLException {
         DriverManager.registerDriver(new Driver());
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-                "root", "ayad2923");
+                "root", "root");
     }
 
     public static void main(String[] args){

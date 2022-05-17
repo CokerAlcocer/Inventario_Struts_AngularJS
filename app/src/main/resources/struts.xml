@@ -21,12 +21,12 @@
             <result name="fail">/view/brands.jsp</result>
         </action>
 
-        <action name="updateCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="update">
+        <action name="removeCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="remove">
             <result name="success">/view/brands.jsp</result>
-            <result name="fail">/view/brands.jsp</result>
+            <result name="fail">/index.jsp</result>
         </action>
 
-        <action name="removeCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="delete">
+        <action name="updateCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="update">
             <result name="success">/view/brands.jsp</result>
             <result name="fail">/view/brands.jsp</result>
         </action>

@@ -97,13 +97,20 @@ public class CategoryDao {
         return state;
     }
 
-    public boolean delete(int id) {
+    public boolean delete(Category c) {
+        System.out.println("\n\n\n\n\n\n");
+        System.out.println("3");
+        System.out.println("\n\n\n\n\n\n");
         boolean state = false;
         try {
             con = DatabaseConnection.getConnection();
             String query = "DELETE FROM category WHERE id = ?";
-            pstm.setInt(1, id);
+            pstm = con.prepareStatement(query);
+            pstm.setInt(1, c.getId());
             state = pstm.executeUpdate() == 1;
+            System.out.println("\n\n\n\n\n\n");
+            System.out.println("4");
+            System.out.println("\n\n\n\n\n\n");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
