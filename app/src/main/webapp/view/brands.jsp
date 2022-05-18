@@ -41,7 +41,7 @@
 <!--FIN DEL TAB DE NAVEGACIÓN-->
 
 <!--INICIO DEL CONTENIDO DE LA PÁGINA-->
-<div class="block mx-4" style="margin-top: 80px;">
+<div class="block mx-4 mb-5" style="margin-top: 80px;">
     <div class="row">
         <div class="col-12 col-lg-8 px-lg-4" id="brands">
             <!--INICIO DEL APARTADO DE MARCAS-->
@@ -136,7 +136,7 @@
 <div class="modal fade" id="addBrand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0">
-            <form action="<%=context%>/addBrand" method="post">
+            <form action="<%=context%>/brand/add" method="post">
                 <div class="card border-0">
                     <div class="card-header pb-1 bg-dark text-white">
                         <h3><i class="fas fa-plus text-right"></i> Registrar marca</h3>
@@ -168,7 +168,7 @@
 <div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content border-0">
-            <form action="<%=context%>/addCategory" method="post">
+            <form action="<%=context%>/category/add" method="post">
                 <div class="card border-0">
                     <div class="card-header pb-1 bg-dark text-white">
                         <h3><i class="fas fa-plus text-right"></i> Registrar categoría</h3>
@@ -222,7 +222,7 @@
 <div class="modal fade" id="modifyBrand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content border-0">
-            <form action="<%=context%>/updateBrand">
+            <form action="<%=context%>/brand/update">
                 <div class="card border-0">
                     <div class="card-header pb-1 bg-dark text-white">
                         <h3><i class="fas fa-edit text-right"></i> Modificar datos de la marca</h3>
@@ -260,7 +260,7 @@
 <div class="modal fade" id="modifyCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content border-0">
-            <form action="<%=context%>/updateCategory">
+            <form action="<%=context%>/category/update">
                 <div class="card border-0">
                     <div class="card-header pb-1 bg-dark text-white">
                         <h3><i class="fas fa-edit text-right"></i> Modificar datos de la categoría</h3>
@@ -310,7 +310,7 @@
 <div class="modal fade" id="removeBrand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0">
-            <form action="<%=context%>/removeBrand" method="post">
+            <form action="<%=context%>/brand/remove" method="post">
                 <div class="card border-0">
                     <div class="card-header pb-1 bg-dark text-white">
                         <h3><i class="fas fa-triangle-exclamation"></i> Atención</h3>
@@ -334,7 +334,7 @@
 <div class="modal fade" id="removeCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0">
-            <form action="<%=context%>/removeCategory" method="post">
+            <form action="<%=context%>/category/remove" method="post">
                 <div class="card border-0">
                     <div class="card-header pb-1 bg-dark text-white">
                         <h3><i class="fas fa-triangle-exclamation"></i> Atención</h3>
@@ -355,7 +355,7 @@
 <!--FIN MODAL DE ELIMINACIÓN-->
 </body>
 
-<script src="<%=context%>/js/functions.js"></script>
+<script src="<%=context%>/js/brandCategoryControllers.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

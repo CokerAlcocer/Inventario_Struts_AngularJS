@@ -8,57 +8,89 @@
     <constant name="struts.action.extension" value="," />
     <constant name="struts.devMode" value="true" />
 
+    <!--NAVEGACIÓN PRINCIPAL-->
     <package name="navigation" extends="struts-default">
-
-        <!--NAVEGACION PRODUCTOS-->
-        <action name="index">
-            <result>/index.jsp</result>
+        <!--NAVEGACION INICIO-->
+        <action name="index" class="mx.utez.edu.app.product.controller.ProductAction" method="findAll">
+            <result name="success">/index.jsp</result>
         </action>
 
         <!--NAVEGACION MARCAS Y CATEGORÍAS-->
         <action name="cb" class="mx.utez.edu.app.extras.CategoryBrandAction" method="findAllBoth">
             <result name="success">/view/brands.jsp</result>
         </action>
+    </package>
 
-        <!--NAVEGACION MARCAS-->
-        <action name="addBrand" class="mx.utez.edu.app.extras.CategoryBrandAction" method="saveBrand">
+    <!--NAVEGACION PRODUCTOS-->
+    <package name="product" namespace="/product" extends="json-default">
+        <interceptors>
+            <interceptor-stack name="myStack">
+                <interceptor-ref name="json" />
+            </interceptor-stack>
+        </interceptors>
+
+        <action name="add" class="mx.utez.edu.app.product.controller.ProductAction" method="saveProduct">
+            <result name="success" type="json"/>
+        </action>
+
+        <action name="remove" class="mx.utez.edu.app.product.controller.ProductAction" method="updateProduct">
+            <result name="success">/index.jsp</result>
+            <result name="fail">/index.jsp</result>
+        </action>
+
+        <action name="update" class="mx.utez.edu.app.product.controller.ProductAction" method="removeProduct">
+            <result name="success">/index.jsp</result>
+            <result name="fail">/index.jsp</result>
+        </action>
+    </package>
+
+    <!--NAVEGACION MARCAS-->
+    <package name="brand" namespace="/brand" extends="struts-default">
+        <action name="add" class="mx.utez.edu.app.extras.CategoryBrandAction" method="saveBrand">
             <result name="success">/view/brands.jsp</result>
             <result name="fail">/view/brands.jsp</result>
         </action>
 
-        <action name="removeBrand" class="mx.utez.edu.app.extras.CategoryBrandAction" method="removeBrand">
+        <action name="remove" class="mx.utez.edu.app.extras.CategoryBrandAction" method="removeBrand">
             <result name="success">/view/brands.jsp</result>
             <result name="fail">/view/brands.jsp</result>
         </action>
 
-        <action name="updateBrand" class="mx.utez.edu.app.extras.CategoryBrandAction" method="updateBrand">
-            <result name="success">/view/brands.jsp</result>
-            <result name="fail">/view/brands.jsp</result>
-        </action>
-
-        <!--NAVEGACION CATEGORIAS-->
-        <action name="addCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="saveCategory">
-            <result name="success">/view/brands.jsp</result>
-            <result name="fail">/view/brands.jsp</result>
-        </action>
-
-        <action name="removeCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="removeCategory">
-            <result name="success">/view/brands.jsp</result>
-            <result name="fail">/view/brands.jsp</result>
-        </action>
-
-        <action name="updateCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="updateCategory">
+        <action name="update" class="mx.utez.edu.app.extras.CategoryBrandAction" method="updateBrand">
             <result name="success">/view/brands.jsp</result>
             <result name="fail">/view/brands.jsp</result>
         </action>
     </package>
 
+    <!--NAVEGACION CATEGORIAS-->
+    <package name="category" namespace="/category" extends="struts-default">
+        <action name="add" class="mx.utez.edu.app.extras.CategoryBrandAction" method="saveCategory">
+            <result name="success">/view/brands.jsp</result>
+            <result name="fail">/view/brands.jsp</result>
+        </action>
+
+        <action name="remove" class="mx.utez.edu.app.extras.CategoryBrandAction" method="removeCategory">
+            <result name="success">/view/brands.jsp</result>
+            <result name="fail">/view/brands.jsp</result>
+        </action>
+
+        <action name="update" class="mx.utez.edu.app.extras.CategoryBrandAction" method="updateCategory">
+            <result name="success">/view/brands.jsp</result>
+            <result name="fail">/view/brands.jsp</result>
+        </action>
+    </package>
+
+    <!--API: JSON-->
     <package name="api" namespace="/api" extends="json-default">
         <interceptors>
             <interceptor-stack name="myStack">
                 <interceptor-ref name="json" />
             </interceptor-stack>
         </interceptors>
+
+        <action name="findAllProducts" class="mx.utez.edu.app.product.controller.ProductAction" method="findAllProducts">
+            <result name="success" type="json" />
+        </action>
 
         <action name="findAllCategories" class="mx.utez.edu.app.extras.CategoryBrandAction" method="findAllCategories">
             <result name="success" type="json" />

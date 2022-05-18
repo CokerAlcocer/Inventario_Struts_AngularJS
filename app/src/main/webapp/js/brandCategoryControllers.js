@@ -10,8 +10,6 @@ const setIdOnModalBrand = (id) => {
 
 const app = angular.module("inventory", []);
 app.controller("categoryController", ($scope, $http, $sce) => {
-    console.log($scope)
-
     $scope.getInfoCategory = (id) => {
         $http({
             method: 'GET',

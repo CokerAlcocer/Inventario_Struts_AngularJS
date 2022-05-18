@@ -46,7 +46,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `inventory`.`product` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
-  `price` DOUBLE NOT NULL,
+  `price` DOUBLE NOT NULL DEFAULT 0,
   `quantity` BIGINT NOT NULL DEFAULT 0,
   `description` TEXT NULL,
   `image_url` TEXT NOT NULL,
