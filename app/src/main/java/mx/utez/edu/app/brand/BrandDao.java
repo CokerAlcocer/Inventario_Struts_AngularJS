@@ -66,6 +66,7 @@ public class BrandDao {
             pstm = con.prepareStatement(query);
             pstm.setString(1, b.getName());
             pstm.setString(2, b.getImageUrl());
+            System.out.println("-----> "+b.getName());
             state = pstm.executeUpdate() == 1;
         } catch(SQLException e) {
             e.printStackTrace();

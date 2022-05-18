@@ -66,6 +66,29 @@ public class CategoryBrandAction extends ActionSupport {
         return "success";
     }
 
+    public String updateBrand() {
+        BrandDao bd = new BrandDao();
+        Brand b = new Brand(uBrId, uBrName, uBrImageUrl);
+        if(!bd.update(b)){
+            findAllBoth();
+            return "fail";
+        }
+
+        findAllBoth();
+        return "success";
+    }
+
+    public String removeBrand() {
+        BrandDao bd = new BrandDao();
+        if(!bd.delete(bId)){
+            findAllBoth();
+            return "fail";
+        }
+
+        findAllBoth();
+        return "success";
+    }
+
     // --- Category Methods ---
     public String findAllCategories() {
         CategoryDao cd = new CategoryDao();

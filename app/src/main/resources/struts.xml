@@ -26,6 +26,16 @@
             <result name="fail">/view/brands.jsp</result>
         </action>
 
+        <action name="removeBrand" class="mx.utez.edu.app.extras.CategoryBrandAction" method="removeBrand">
+            <result name="success">/view/brands.jsp</result>
+            <result name="fail">/view/brands.jsp</result>
+        </action>
+
+        <action name="updateBrand" class="mx.utez.edu.app.extras.CategoryBrandAction" method="updateBrand">
+            <result name="success">/view/brands.jsp</result>
+            <result name="fail">/view/brands.jsp</result>
+        </action>
+
         <!--NAVEGACION CATEGORIAS-->
         <action name="addCategory" class="mx.utez.edu.app.extras.CategoryBrandAction" method="saveCategory">
             <result name="success">/view/brands.jsp</result>
@@ -50,7 +60,11 @@
             </interceptor-stack>
         </interceptors>
 
-        <action name="findCategoryById" class="mx.utez.edu.app.extras.CategoryBrandAction" method="findAllCategories">
+        <action name="findAllCategories" class="mx.utez.edu.app.extras.CategoryBrandAction" method="findAllCategories">
+            <result name="success" type="json" />
+        </action>
+
+        <action name="findAllBrands" class="mx.utez.edu.app.extras.CategoryBrandAction" method="findAllBrands">
             <result name="success" type="json" />
         </action>
     </package>

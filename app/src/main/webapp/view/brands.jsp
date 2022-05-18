@@ -34,8 +34,7 @@
         <div class="navbar-nav">
             <a class="nav-item nav-link" href="<s:url action="index" />"><i class="bi bi-basket-fill"></i>
                 Productos</a>
-            <a class="nav-item nav-link active" href="<s:url action="cb#brands" />"><i class="fas fa-tag"></i> Marcas</a>
-            <a class="nav-item nav-link active" href="<s:url action="cb#categories" />"><i class="bi bi-circle-square"></i> Categorías</a>
+            <a class="nav-item nav-link active" href="<s:url action="cb" />"><i class="bi bi-circle-square"></i> Categorías</a>
         </div>
     </div>
 </nav>
@@ -71,12 +70,10 @@
                                 <div class="card-body mt-0 text-center">
                                     <div class="col-12 mt-0">
                                         <big>
-                                            <i role="button" title="Eliminar Producto" data-target="#removeModal"
+                                            <i role="button" onclick="setIdOnModalBrand(<s:property value="id" />)" title="Eliminar Marca" data-target="#removeBrand"
                                                data-toggle="modal" class="fas fa-trash mr-3 text-danger"></i>
-                                            <i role="button" title="Editar Datos" data-target="#modifyModal"
-                                               data-toggle="modal" class="fas fa-edit mr-3 text-primary"></i>
-                                            <i role="button" title="Mas Información" data-toggle="modal"
-                                               data-target="#addQuantityModal" class="fas fa-info-circle text-primary"></i>
+                                            <i role="button" ng-click="getInfoBrand(<s:property value="id" />)" title="Editar Datos" data-target="#modifyBrand"
+                                               data-toggle="modal" class="fas fa-edit text-primary"></i>
                                         </big>
                                     </div>
                                 </div>
@@ -117,9 +114,9 @@
                                     </div>
                                     <div class="col-4 text-right">
                                         <big>
-                                            <i role="button" onclick="setIdOnModal(<s:property value="id" />)" title="Eliminar Producto" data-target="#removeCategory"
+                                            <i role="button" onclick="setIdOnModalCategory(<s:property value="id" />)" title="Eliminar Categoría" data-target="#removeCategory"
                                                data-toggle="modal" class="fas fa-trash mr-3 text-danger"></i>
-                                            <i role="button" ng-click="getInfo(<s:property value="id" />)" title="Editar Datos" data-target="#modifyCategory"
+                                            <i role="button" ng-click="getInfoCategory(<s:property value="id" />)" title="Editar Datos" data-target="#modifyCategory"
                                                data-toggle="modal" class="fas fa-edit text-primary"></i>
                                         </big>
                                     </div>
@@ -152,7 +149,7 @@
                         </div>
                         <div class="form-group">
                             <label for="bImageUrl">Url del logo de la marca <span class="text-danger">*</span></label>
-                            <input type="text" id="bImageUrl" name="bImageUrl" placeholder="No usar url's largas"
+                            <input type="text" id="bImageUrl" name="bImageUrl" placeholder="Dirección web del logotipo"
                                    class="form-control" autocomplete="off" required>
                         </div>
                     </div>
@@ -221,6 +218,44 @@
 </div>
 <!--FIN MODAL DE REGISTRO-->
 
+<!--INICIO MODAL DE MODIFICACIÓN MARCA-->
+<div class="modal fade" id="modifyBrand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0">
+            <form action="<%=context%>/updateBrand">
+                <div class="card border-0">
+                    <div class="card-header pb-1 bg-dark text-white">
+                        <h3><i class="fas fa-edit text-right"></i> Modificar datos de la marca</h3>
+                    </div>
+                    <div class="card-body">
+                        <input type="text" hidden ng-model="uBrId" id="uBrId" name="uBrId" />
+                        <div class="form-group">
+                            <label for="uBrName">Nombre de la marca <span class="text-danger">*</span></label>
+                            <input type="text" ng-model="uBrName" id="uBrName" name="uBrName" placeholder="Ej. Nike"
+                                   class="form-control" autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="uBrImageUrl">Url del logo de la marca <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <input type="text" ng-model="uBrImageUrl" id="uBrImageUrl" name="uBrImageUrl" placeholder="Dirección web del logotipo"
+                                       class="form-control" autocomplete="off" required>
+                                <div class="input-group-append">
+                                    <button type="button" ng-click="clearUrl()" title="Borrar Campo" class="btn btn-dark"><span class="fas fa-eraser"></span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Descartar</button>
+                        <button type="submit" class="btn btn-primary">Modificar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--FIN MODAL DE MODIFICACIÓN-->
+
 <!--INICIO MODAL DE MODIFICACIÓN DE CATEGORÍA-->
 <div class="modal fade" id="modifyCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -271,7 +306,31 @@
 </div>
 <!--FIN MODAL DE MODIFICACIÓN-->
 
-<!--INICIO MODAL ELIMINACIÓN-->
+<!--INICIO MODAL ELIMINACIÓN MARCA-->
+<div class="modal fade" id="removeBrand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0">
+            <form action="<%=context%>/removeBrand" method="post">
+                <div class="card border-0">
+                    <div class="card-header pb-1 bg-dark text-white">
+                        <h3><i class="fas fa-triangle-exclamation"></i> Atención</h3>
+                    </div>
+                    <div class="card-body">
+                        <strong>Esta acción es irreversible</strong> ¿Está seguro que desea eliminar esta marca?
+                    </div>
+                    <div class="card-footer text-right">
+                        <input type="text" hidden id="bId" name="bId">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--FIN MODAL DE ELIMINACIÓN-->
+
+<!--INICIO MODAL ELIMINACIÓN CATEGORÍA-->
 <div class="modal fade" id="removeCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0">
