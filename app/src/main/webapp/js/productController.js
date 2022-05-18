@@ -34,6 +34,7 @@ app.controller('productInfoController', ($scope, $http) => {
                     break;
                 }
             }
+            console.log($scope.u)
         }, function errorCallback(res) {
             console.log(res);
         });

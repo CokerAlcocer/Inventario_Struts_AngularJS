@@ -241,16 +241,16 @@
               <div class="col-12 col-lg-6">
                 <div class="form-group">
                   <label for="uMarca">Marca <span class="text-danger">*</span></label>
-                  <select class="form-control" ng-model="u.brand" name="uMarca" id="uMarca">
+                  <select class="form-control" ng-value="u.brandId" ng-model="u.brandId" name="uMarca" id="uMarca">
                     <option disabled>Seleccione una marca</option>
                     <s:iterator value="brands">
-                      <option selected="<s:if test=""></s:if>" value="<s:property value="id"/>"><s:property value="name"/></option>
+                      <option  value="<s:property value="id"/>"><s:property value="name"/></option>
                     </s:iterator>
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="uCategory">Categoría <span class="text-danger">*</span></label>
-                  <select class="form-control" ng-model="u.category" name="uCategory" id="uCategory">
+                  <select class="form-control" ng-value="u.categoryId" ng-model="u.categoryId" name="uCategory" id="uCategory">
                     <option disabled>Seleccione una categoría</option>
                     <s:iterator value="categories">
                       <option value="<s:property value="id"/>"><s:property value="name"/></option>
