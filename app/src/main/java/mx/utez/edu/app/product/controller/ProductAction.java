@@ -56,7 +56,8 @@ public class ProductAction extends ActionSupport {
 
     public String updateProduct() {
         ProductDao pd = new ProductDao();
-        Product p = new Product(uId, uQuantity, uBrandId, uCategoryId, uPrice, uName, uDescription, uImageUrl);
+        Gson gson = new Gson();
+        Product p = gson.fromJson(params, Product.class);
         if (!pd.update(p)){
             findAll();
             return "fail";
@@ -83,11 +84,7 @@ public class ProductAction extends ActionSupport {
         BrandDao bd = new BrandDao();
         CategoryDao cd = new CategoryDao();
 
-        products = new ArrayList<>();
-        brands = new ArrayList<>();
-        categories = new ArrayList<>();
-
-        products = pd.findAll();
+        products = pd.findAllWithCategory();
         brands = bd.findAll();
         categories = cd.findAll();
 

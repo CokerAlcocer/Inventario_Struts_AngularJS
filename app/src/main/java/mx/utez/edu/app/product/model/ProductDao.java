@@ -44,6 +44,38 @@ public class ProductDao {
         return products;
     }
 
+    public List<Product> findAllWithCategory() {
+        List<Product> products = new ArrayList<>();
+        try {
+            con = DatabaseConnection.getConnection();
+            String query = "SELECT p.*, c.name AS category_name, c.icon_name AS icon_name FROM product p INNER JOIN category c ON p.category_id = c.id";
+            stm = con.createStatement();
+            rs = stm.executeQuery(query);
+            while(rs.next()){
+                Product p = new Product(
+                        rs.getInt("id"),
+                        rs.getInt("quantity"),
+                        rs.getInt("brand_id"),
+                        rs.getInt("category_id"),
+                        rs.getDouble("price"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getString("image_url"),
+                        rs.getString("category_name"),
+                        rs.getString("icon_name")
+                );
+
+                products.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+
+        return products;
+    }
+
     public Product findById(int id) {
         Product p = new Product();
         try {

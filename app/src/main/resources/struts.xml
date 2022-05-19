@@ -33,14 +33,12 @@
             <result name="success" type="json"/>
         </action>
 
-        <action name="remove" class="mx.utez.edu.app.product.controller.ProductAction" method="updateProduct">
-            <result name="success">/index.jsp</result>
-            <result name="fail">/index.jsp</result>
+        <action name="remove" class="mx.utez.edu.app.product.controller.ProductAction" method="removeProduct">
+            <result name="success" type="json"/>
         </action>
 
-        <action name="update" class="mx.utez.edu.app.product.controller.ProductAction" method="removeProduct">
-            <result name="success">/index.jsp</result>
-            <result name="fail">/index.jsp</result>
+        <action name="update" class="mx.utez.edu.app.product.controller.ProductAction" method="updateProduct">
+            <result name="success" type="json"/>
         </action>
     </package>
 

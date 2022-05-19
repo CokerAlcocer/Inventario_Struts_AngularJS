@@ -3,7 +3,7 @@ package mx.utez.edu.app.product.model;
 public class Product {
     private int id, quantity, brandId, categoryId;
     private double price;
-    private String name, description, imageUrl;
+    private String name, description, imageUrl, categoryName, categoryIconName;
 
     public Product() {
     }
@@ -27,6 +27,19 @@ public class Product {
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
+    }
+
+    public Product(int id, int quantity, int brandId, int categoryId, double price, String name, String description, String imageUrl, String categoryName, String categoryIconName) {
+        this.id = id;
+        this.quantity = quantity;
+        this.brandId = brandId;
+        this.categoryId = categoryId;
+        this.price = price;
+        this.name = name;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.categoryName = categoryName;
+        this.categoryIconName = categoryIconName;
     }
 
     public int getId() {
@@ -91,5 +104,21 @@ public class Product {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getCategoryIconName() {
+        return categoryIconName;
+    }
+
+    public void setCategoryIconName(String categoryIconName) {
+        this.categoryIconName = categoryIconName;
     }
 }
